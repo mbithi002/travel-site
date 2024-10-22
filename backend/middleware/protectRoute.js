@@ -25,6 +25,7 @@ export const protectRoute = async (req, res, next) => {
       });
     }
     req.user = user;
+    req.isAdmin = user.role === "admin" ? true : false;
     next();
   } catch (error) {
     console.log("Error in protect route", error);

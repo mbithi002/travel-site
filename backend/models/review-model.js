@@ -2,12 +2,12 @@ import mongoose from "mongoose";
 
 const reviewSchema = new mongoose.Schema(
   {
-    userId: {
+    user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
     },
-    DestinationId: {
+    destination: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Destination",
       required: true,
@@ -28,6 +28,6 @@ const reviewSchema = new mongoose.Schema(
   }
 );
 
-const Review = new mongoose.model(reviewSchema);
+const Review = new mongoose.model("Review", reviewSchema);
 
 export default Review;

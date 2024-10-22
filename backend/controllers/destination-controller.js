@@ -50,10 +50,6 @@ export const createDestination = async (req, res) => {
       availability,
     } = req.body;
 
-    if (!name || !description || !location || !categories || !price) {
-      return res.status(400).json({ error: "All fields are required" });
-    }
-
     // const uploadedImages = await Promise.all(
     //   images?.map((image) => uploadImageToCloudinary(image))
     // );

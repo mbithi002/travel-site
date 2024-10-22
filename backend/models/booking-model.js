@@ -2,18 +2,14 @@ import mongoose from "mongoose";
 
 const bookingSchema = new mongoose.Schema(
   {
-    userId: {
+    user: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "user",
+      ref: "User",
       required: true,
     },
-    destinationId: {
+    destination: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Destination",
-      required: true,
-    },
-    bookingDate: {
-      type: Date,
       required: true,
     },
     status: {
@@ -32,6 +28,6 @@ const bookingSchema = new mongoose.Schema(
   }
 );
 
-const Booking = new mongoose.model(bookingSchema);
+const Booking = new mongoose.model("Booking", bookingSchema);
 
 export default Booking;
