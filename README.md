@@ -1,6 +1,7 @@
 MERN
 Travelling site
 -users
--browser destinations
--book trips
+-browse for destinations
+-book / cancel trips
+-pay
 -review
