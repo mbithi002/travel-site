@@ -15,7 +15,7 @@ const destinationSchema = new mongoose.Schema(
     images: [
       {
         type: String,
-        required: true,
+        required: false,
       },
     ],
     location: {
@@ -47,6 +47,6 @@ const destinationSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const Destination = new mongoose.model(destinationSchema);
+const Destination = new mongoose.model("Destination", destinationSchema);
 
 export default Destination;
