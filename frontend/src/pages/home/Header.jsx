@@ -1,8 +1,37 @@
-import React from 'react'
-import Login from './Login'
-import Signup from './Signup'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import React from 'react';
+import { toast } from 'react-hot-toast';
+import { BiLogOut } from "react-icons/bi";
+import Spinner from '../../components/common/Spinner';
+import Login from './Login';
+import Signup from './Signup';
 
 const Header = () => {
+    const { data: authUser, isLoading } = useQuery({ queryKey: ['authUser'] })
+    const queryClient = useQueryClient();
+    const { mutate: logout } = useMutation({
+        mutationFn: async () => {
+            try {
+                const res = await fetch('/api/auth/logout', {
+                    method: 'POST',
+                })
+
+                const data = await res.data;
+                if (!res.ok) {
+                    throw new Error(data.message) || "something went wrong"
+                }
+            } catch (error) {
+                throw new Error(error.message)
+            }
+        },
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ['authUser'] });
+        },
+        onError: () => {
+            toast.error("Failed to logout")
+        }
+    })
+
     return (
         <div>
             <div className="navbar bg-base-100 text-neutral">
@@ -55,20 +84,39 @@ const Header = () => {
                         </li>
                     </ul>
                 </div>
-                <div className="navbar-end">
-                    <div className="dropdown dropdown-end">
-                        <div tabIndex={0} role="button" className="btn btn-primary m-1">Login</div>
-                        <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-[1] w-70 p-2 shadow">
-                            <Login />
-                        </ul>
-                    </div>
-                    <div className="dropdown dropdown-end">
-                        <div tabIndex={0} role="button" className="btn m-1">Signup</div>
-                        <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-[1] w-70 p-2 shadow">
-                            <Signup />
-                        </ul>
-                    </div>
-                </div>
+                {
+                    isLoading ? (
+                        <div className="navbar-end flex">
+                            <Spinner size='sm' bg='blue' />
+                        </div>
+                    ) : (
+                        authUser && !isLoading ? (
+                            <div className="navbar-end">
+                                <div className="btn btn-primary">Profile</div>
+                                <BiLogOut onClick={(e) => {
+                                    e.preventDefault()
+                                    logout()
+                                }} className='w-5 m-3 hover:shadow-2xl h-5 cursor-pointer' />
+                            </div>
+
+                        ) : (
+                            <div className="navbar-end">
+                                <div className="dropdown dropdown-end">
+                                    <div tabIndex={0} role="button" className="btn btn-primary m-1">Login</div>
+                                    <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-[1] w-70 p-2 shadow">
+                                        <Login />
+                                    </ul>
+                                </div>
+                                <div className="dropdown dropdown-end">
+                                    <div tabIndex={0} role="button" className="btn m-1">Signup</div>
+                                    <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-[1] w-70 p-2 shadow">
+                                        <Signup />
+                                    </ul>
+                                </div>
+                            </div>)
+                    )
+                }
+
             </div>
         </div>
     )

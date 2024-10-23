@@ -1,10 +1,6 @@
-import React from 'react'
+const Spinner = ({ size = "md", bg = 'black' }) => {
+    const sizeClass = `loading-${size}`;
 
-const Spinner = ({ size: 'sm' }) => {
-    const sizeClass = `loading-${size}`
-    return (
-        <span className={`loading loading-spinner ${sizeClass}`}></span>
-    )
-}
-
-export default Spinner
+    return <span className={`mx-auto loading loading-spinner ${sizeClass} bg-[${bg}]`} />;
+};
+export default Spinner;
