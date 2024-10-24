@@ -4,7 +4,7 @@ import { generateJwt } from "../utils/generateJwt.js";
 
 export const signup = async (req, res) => {
   try {
-    const { email, password, username, fullName } = req.body;
+    const { email, password, username, fullName, role } = req.body;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (!emailRegex.test(email)) {
@@ -42,6 +42,7 @@ export const signup = async (req, res) => {
       username,
       email,
       password: hashedPassword,
+      role: role ? role : "user",
     });
 
     await newUser.save();

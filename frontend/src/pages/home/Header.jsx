@@ -2,6 +2,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import React from 'react';
 import { toast } from 'react-hot-toast';
 import { BiLogOut } from "react-icons/bi";
+import { Link } from 'react-router-dom';
 import Spinner from '../../components/common/Spinner';
 import Login from './Login';
 import Signup from './Signup';
@@ -54,31 +55,83 @@ const Header = () => {
                         <ul
                             tabIndex={0}
                             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-                            <li><a>Home</a></li>
-                            <li><a>Destinations</a></li>
                             <li>
-                                <a>Parent</a>
-                                <ul className="p-2">
-                                    <li><a>Submenu 1</a></li>
-                                    <li><a>Submenu 2</a></li>
-                                </ul>
+                                <Link to={'/'}>
+                                    Home
+                                </Link>
                             </li>
+                            <li>
+                                <Link to={'/destinations'}>
+                                    Destinations
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to={'/about'}>
+                                    About
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to={'/booking'}>
+                                    Booking
+                                </Link>
+                            </li>
+                            {/* <li>
+                                <details className='w-43 bg-base-100'>
+                                    <summary>More</summary>
+                                    <ul className="p-2 w-43"> */}
+                            <li>
+                                <Link to={'/destinations'}>
+                                    My bookings
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to={'/destinations'}>
+                                    Pending
+                                </Link>
+                            </li>
+                            {/* </ul>
+                                </details>
+                            </li> */}
                         </ul>
                     </div>
                     <a className="btn btn-ghost text-xl">Travel</a>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
-                        <li><a>Home</a></li>
-                        <li><a>Destinations</a></li>
-                        <li><a>About</a></li>
-                        <li><a>contact</a></li>
                         <li>
-                            <details>
-                                <summary>Parent</summary>
-                                <ul className="p-2">
-                                    <li><a>Submenu 1</a></li>
-                                    <li><a>Submenu 2</a></li>
+                            <Link to={'/'}>
+                                Home
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to={'/destinations'}>
+                                Destinations
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to={'/about'}>
+                                About
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to={'/booking'}>
+                                Booking
+                            </Link>
+                        </li>
+                        <li>
+                            <details className='w-43 bg-base-100'>
+                                <summary>More</summary>
+                                <ul className="p-2 w-43">
+                                    <li>
+                                        <Link to={'/destinations'}>
+                                            My bookings
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link to={'/destinations'}>
+                                            Pending
+                                        </Link>
+                                    </li>
                                 </ul>
                             </details>
                         </li>

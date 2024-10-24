@@ -4,7 +4,7 @@ import Destination from "../models/destination-model.js";
 export const getDestinations = async (req, res) => {
   try {
     const destinations = await Destination.find();
-    if (!destinations.length) {
+    if (!destinations) {
       return res.status(404).json({ error: "No destinations found" });
     }
     res.status(200).json(destinations);

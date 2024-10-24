@@ -1,6 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import { Toaster } from 'react-hot-toast';
+import { Route, Routes } from 'react-router';
 import './App.css';
+import Footer from './components/Footer';
+import Destinations from './pages/destinations/Destinations';
+import Header from './pages/home/Header';
 import Home from './pages/home/home';
 
 function App() {
@@ -23,8 +27,13 @@ function App() {
   });
   return (
     <>
-      <Home />
+      <Header />
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/destinations' element={<Destinations />} />
+      </Routes>
       <Toaster />
+      <Footer />
     </>
   )
 }

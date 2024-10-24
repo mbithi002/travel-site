@@ -1,16 +1,13 @@
 import React from 'react'
 import HomeImage from '../../assets/images/home/resort.jpg'
-import Footer from '../../components/Footer'
 import Activities from './Activities'
 import FeaturedDestinations from './FeaturedDestinations'
-import Header from './Header'
 import TestimonialsSection from './TestimonialsSection'
 
 const Home = () => {
     return (
         <>
-            <Header />
-            <div className="grid sm:grid-cols-12 sm:gap-4 sm:h-[80dvh] h-screen w-full">
+            <div className="grid sm:grid-cols-12 sm:gap-4 sm:h-[80dvh] h-[90dvh] w-full">
                 <div className="col-span-8 mx-auto w-full hidden sm:block">
                     <div className="hero h-full">
                         <div className="hero-content text-center">
@@ -47,7 +44,6 @@ const Home = () => {
             <FeaturedDestinations />
             <Activities />
             <TestimonialsSection />
-            <Footer />
         </>
     )
 }

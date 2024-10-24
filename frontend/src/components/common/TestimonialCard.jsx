@@ -2,7 +2,7 @@ import React from 'react';
 
 const TestimonialCard = ({ quote, name, image }) => {
     return (
-        <div className="bg-white shadow-md rounded-lg p-6 max-w-sm">
+        <div className="bg-white shadow-md hover:shadow-xl transition-all duration-100 rounded-lg p-6 max-w-sm">
             <div className="flex items-center">
                 {image && (
                     <img
@@ -12,7 +12,7 @@ const TestimonialCard = ({ quote, name, image }) => {
                     />
                 )}
                 <div>
-                    <h3 className="text-lg font-semibold">{name}</h3>
+                    <h3 className="text-lg font-semibold text-neutral">{name}</h3>
                 </div>
             </div>
             <p className="mt-4 text-gray-600 italic">"{quote}"</p>

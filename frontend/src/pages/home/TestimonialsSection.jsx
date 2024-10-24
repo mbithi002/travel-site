@@ -21,7 +21,7 @@ const TestimonialsSection = () => {
     ];
 
     return (
-        <div className="flex flex-wrap gap-6 justify-center">
+        <div className="flex flex-wrap gap-6 justify-center my-3">
             {testimonials.map((testimonial, index) => (
                 <TestimonialCard
                     key={index}
