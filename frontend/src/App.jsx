@@ -3,6 +3,7 @@ import { Toaster } from 'react-hot-toast';
 import { Route, Routes } from 'react-router';
 import './App.css';
 import Footer from './components/Footer';
+import AboutUs from './pages/about/AboutUs';
 import Destinations from './pages/destinations/Destinations';
 import Header from './pages/home/Header';
 import Home from './pages/home/home';
@@ -31,6 +32,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/destinations' element={<Destinations />} />
+        <Route path='/about' element={<AboutUs />} />
       </Routes>
       <Toaster />
       <Footer />

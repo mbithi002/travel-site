@@ -41,7 +41,7 @@ const BentoDestinations = () => {
                                 className="break-inside-avoid bg-gray-200 text-neutral rounded-lg p-4 shadow-md cursor-pointer hover:shadow-lg transition-shadow duration-300"
                             >
                                 <img
-                                    src={des.images[0]} // Display the first image as a preview
+                                    src={des.images[0]}
                                     alt={destination.name}
                                     className="w-full h-auto rounded-lg mb-4 object-cover"
                                 />

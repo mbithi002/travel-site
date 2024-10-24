@@ -65,16 +65,11 @@ const Header = () => {
                                     Destinations
                                 </Link>
                             </li>
-                            <li>
-                                <Link to={'/about'}>
-                                    About
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to={'/booking'}>
-                                    Booking
-                                </Link>
-                            </li>
+                        <li>
+                            <Link to={'/about'}>
+                                About
+                            </Link>
+                        </li>
                             {/* <li>
                                 <details className='w-43 bg-base-100'>
                                     <summary>More</summary>
@@ -111,11 +106,6 @@ const Header = () => {
                         <li>
                             <Link to={'/about'}>
                                 About
-                            </Link>
-                        </li>
-                        <li>
-                            <Link to={'/booking'}>
-                                Booking
                             </Link>
                         </li>
                         <li>
