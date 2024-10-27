@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
-import Spinner from '../../components/common/Spinner';
 
 import { DESTINATIONS } from './data/DESTINATIONS.js';
 
@@ -27,12 +26,37 @@ const BentoDestinations = () => {
 
     return (
         <div className="px-4">
+            {isLoading && (
+                <div className="grid sm:grid-cols-4 p-5 gap-5">
+                    <div className="flex w-[14rem] flex-col gap-4 mx-auto">
+                        <div className="skeleton h-48 w-full bg-accent"></div>
+                        <div className="skeleton h-10 w-28 bg-accent"></div>
+                        <div className="skeleton h-10 w-full bg-accent"></div>
+                        <div className="skeleton h-10 w-full bg-accent"></div>
+                    </div>
+                    <div className="flex w-[14rem] flex-col gap-4 mx-auto">
+                        <div className="skeleton h-48 w-full bg-accent"></div>
+                        <div className="skeleton h-10 w-28 bg-accent"></div>
+                        <div className="skeleton h-10 w-full bg-accent"></div>
+                        <div className="skeleton h-10 w-full bg-accent"></div>
+                    </div>
+                    <div className="flex w-[14rem] flex-col gap-4 mx-auto">
+                        <div className="skeleton h-48 w-full bg-accent"></div>
+                        <div className="skeleton h-10 w-28 bg-accent"></div>
+                        <div className="skeleton h-10 w-full bg-accent"></div>
+                        <div className="skeleton h-10 w-full bg-accent"></div>
+                    </div>
+                    <div className="flex w-[14rem] flex-col gap-4 mx-auto">
+                        <div className="skeleton h-48 w-full bg-accent"></div>
+                        <div className="skeleton h-10 w-28 bg-accent"></div>
+                        <div className="skeleton h-10 w-full bg-accent"></div>
+                        <div className="skeleton h-10 w-full bg-accent"></div>
+                    </div>
+                </div>
+            )}
             <div
-                className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-4 space-y-4"
+                className="columns-2 sm:columns-2 lg:columns-3 xl:columns-4 gap-4 space-y-4"
             >
-                {isLoading && (
-                    <div className="w-full h-screen"><Spinner size='lg' /></div>
-                )}
                 {
                     !isLoading && !isError && DESTINATIONS.map((des) => {
                         return destinations.map((destination, index) => (

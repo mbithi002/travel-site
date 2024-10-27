@@ -41,11 +41,20 @@ const Header = () => {
                                     Destinations
                                 </Link>
                             </li>
-                        <li>
-                            <Link to={'/about'}>
-                                About
-                            </Link>
-                        </li>
+                            <li>
+                                <Link to={'/about'}>
+                                    About
+                                </Link>
+                            </li>
+                            {
+                                authUser?.role === 'admin' && (
+                                    <li>
+                                        <Link to={'/admin'}>
+                                            Admin
+                                        </Link>
+                                    </li>
+                                )
+                            }
                             {/* <li>
                                 <details className='w-43 bg-base-100'>
                                     <summary>More</summary>
@@ -60,9 +69,6 @@ const Header = () => {
                                     Pending
                                 </Link>
                             </li>
-                            {/* </ul>
-                                </details>
-                            </li> */}
                         </ul>
                     </div>
                     <a className="btn btn-ghost text-xl">Travel</a>
@@ -84,6 +90,15 @@ const Header = () => {
                                 About
                             </Link>
                         </li>
+                        {
+                            authUser?.role === 'admin' && (
+                                <li>
+                                    <Link to={'/admin'}>
+                                        Admin
+                                    </Link>
+                                </li>
+                            )
+                        }
                         <li>
                             <details className='w-43 bg-base-100'>
                                 <summary>More</summary>

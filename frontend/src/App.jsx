@@ -4,6 +4,7 @@ import { Route, Routes } from 'react-router';
 import './App.css';
 import Footer from './components/Footer';
 import AboutUs from './pages/about/AboutUs';
+import Admin from './pages/admin/Admin';
 import Destinations from './pages/destinations/Destinations';
 import Header from './pages/home/Header';
 import Home from './pages/home/home';
@@ -33,6 +34,7 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/destinations' element={<Destinations />} />
         <Route path='/about' element={<AboutUs />} />
+        <Route path='/admin' element={authUser?.role === 'admin' && <Admin />} />
       </Routes>
       <Toaster />
       <Footer />
