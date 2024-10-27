@@ -102,7 +102,7 @@ export const updateUser = async (req, res) => {
 export const deleteUser = async (req, res) => {
   try {
     const userId = req.user._id;
-    const user = await User.findById(userId);
+    const user = await User.findById(String(userId));
     if (!user) {
       return res.status(404).json({
         error: "no user found",
@@ -110,7 +110,7 @@ export const deleteUser = async (req, res) => {
     }
     const response = await User.findByIdAndDelete(userId);
     res.status(200).json({
-      message: "user deleted successfullys",
+      message: "user deleted successfully",
     });
   } catch (error) {
     res.status(500).json({

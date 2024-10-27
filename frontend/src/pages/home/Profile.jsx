@@ -64,6 +64,30 @@ const Profile = () => {
             toast.success("New profile saved")
         }
     })
+
+    const { mutate: deleteProfile, isPending: isDeleting, isError: isErrorDeleting } = useMutation({
+        mutationFn: async () => {
+            try {
+                const res = await fetch(`/api/users/`, {
+                    method: "DELETE",
+                })
+                const data = await res.json();
+                if (!res.ok) {
+                    throw new Error(data.error) || 'something went wrong'
+                }
+                return data
+            } catch (error) {
+                throw new Error(error)
+            }
+        },
+        onSuccess: () => {
+            toast.success("Profile deleted successfully")
+            queryClient.invalidateQueries({ queryKey: ['authUser'] });
+        },
+        onError: () => {
+            toast.error("Failed to delete profile")
+        }
+    })
     useEffect(() => {
         if (authUser) {
             setFormData({
@@ -210,6 +234,23 @@ const Profile = () => {
                             {isUpdating ? "saving..." : "Update"}
                         </button>
                     </form>
+                    {/* Open the modal using document.getElementById('ID').showModal() method */}
+                    <button className="btn my-1" onClick={() => document.getElementById('my_modal_1').showModal()}>Delete Proile</button>
+                    <dialog id="my_modal_1" className="modal">
+                        <div className="modal-box">
+                            <h3 className="font-bold text-lg text-red-500">Delete profile</h3>
+                            <p className="py-4 my-2">
+                                Deleting this profile erases all data e.g bookings and payment linked to this account!
+                                Type your username below to confiirm
+                            </p>
+                            <button onClick={() => deleteProfile()} className="btn bg-red-500 mx-2 border-none text-base-100">Confirm</button>
+                            <div className="modal-action">
+                                <form method="dialog">
+                                    <button className="btn btn-primary text-base-100">Cancel</button>
+                                </form>
+                            </div>
+                        </div>
+                    </dialog>
                     <li>
                         <div className="btn w-full hover:bg-red-400" onClick={(e) => {
                             e.preventDefault()
