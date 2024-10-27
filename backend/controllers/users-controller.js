@@ -50,9 +50,9 @@ export const updateUser = async (req, res) => {
       });
     }
 
-    if ((newPassword && !oldPassword) || (oldPassword && !newPassword)) {
-      return res.status(403).json({
-        error: "Please provide both old and new password",
+    if ((!newPassword && oldPassword) || (!oldPassword && newPassword)) {
+      return res.status(400).json({
+        error: "Old password and new password must be provided",
       });
     }
 

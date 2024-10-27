@@ -38,7 +38,7 @@ const BentoDestinations = () => {
                         return destinations.map((destination, index) => (
                             <div
                                 key={index}
-                                className="break-inside-avoid bg-gray-200 text-neutral rounded-lg p-4 shadow-md cursor-pointer hover:shadow-lg transition-shadow duration-300"
+                                className="relative break-inside-avoid bg-gray-200 text-neutral rounded-lg p-4 shadow-md cursor-pointer hover:shadow-lg transition-shadow duration-300"
                             >
                                 <img
                                     src={des.images[0]}
@@ -47,6 +47,7 @@ const BentoDestinations = () => {
                                 />
                                 <h2 className="text-lg font-bold mb-2">{destination.name}</h2>
                                 <p className="text-sm">{destination.description}</p>
+                                {/* <button className="bg-gray-200 bg-opacity-[.6] text-base-100 my-3 rounded-md self-center p-1 absolute top-3 left-3 text-sm">Book now</button> */}
                             </div>
                         ))
                     }
