@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Bookings from './Bookings'
 import Destinations from './Destinations'
+import Reviews from './Reviews'
 import Users from './Users'
 
 const Admin = () => {
@@ -29,6 +30,7 @@ const Admin = () => {
                             <li onClick={() => setContent('users')} ><a>Users</a></li>
                             <li onClick={() => setContent('destinations')}><a>Destinations</a></li>
                             <li onClick={() => setContent('bookings')}><a>Bookings</a></li>
+                            <li onClick={() => setContent('reviews')}><a>Reviews</a></li>
                         </ul>
                     </div>
                 </div>
@@ -52,6 +54,7 @@ const Admin = () => {
             {content === 'users' && <Users />}
             {content === 'destinations' && <Destinations />}
             {content === 'bookings' && <Bookings />}
+            {content === 'reviews' && <Reviews />}
         </div>
     )
 }

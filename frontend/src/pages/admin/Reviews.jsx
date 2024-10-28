@@ -1,9 +1,9 @@
 import React from 'react'
-import useDestinations from '../../hooks/useDestinations.jsx'
-import { formatPostDate } from '../../utils/date/index.js'
+import useReviews from '../../hooks/useReviews'
+import { formatPostDate } from '../../utils/date'
 
-const Destinations = () => {
-    const { destinations, isLoading, isError } = useDestinations()
+const Reviews = () => {
+    const { reviews, isLoading, isError } = useReviews()
     if (isLoading) {
         return <div className="skeleton h-[75dvh] my-3 w-full bg-gray-300"></div>
     }
@@ -21,31 +21,35 @@ const Destinations = () => {
                         <tr>
                             <th>
                             </th>
-                            <th>Images</th>
-                            <th>Name</th>
-                            <th>Price</th>
-                            <th>createdAt</th>
+                            <th>User</th>
+                            <th>Destination</th>
+                            <th>Rating</th>
+                            <th>Comment</th>
+                            <th>Created at</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         {
-                            destinations && destinations.map((destination, i) => (
-                                <tr key={destination._id} className='hover:bg-base-100 text-neutral transition-all duration-100'>
+                            reviews && reviews.map((review, i) => (
+                                <tr key={review._id} className='hover:bg-base-100 text-neutral transition-all duration-100'>
                                     <th className='hover:bg-gray-100 transition-all duration-100'>
                                         {i + 1}
                                     </th>
                                     <td className='hover:bg-gray-100 transition-all duration-100'>
-                                        {destination.name}
+                                        {review.user.fullName}
                                     </td>
                                     <td className='hover:bg-gray-100 transition-all duration-100'>
-                                        {destination.name}
+                                        {review.destination.name}
                                     </td>
                                     <td className='hover:bg-gray-100 transition-all duration-100'>
-                                        {destination.price}
+                                        {review.rating}
                                     </td>
                                     <th className='hover:bg-gray-100 transition-all duration-100'>
-                                        {formatPostDate(destination.createdAt)}
+                                        {review.comment}
+                                    </th>
+                                    <th className='hover:bg-gray-100 transition-all duration-100'>
+                                        {formatPostDate(review.createdAt)}
                                     </th>
                                     <th className='text-primary hover:cursor-pointer hover:underline hover:bg-gray-100 transition-all duration-100'>
                                         Details
@@ -59,17 +63,18 @@ const Destinations = () => {
                         <tr>
                             <th>
                             </th>
-                            <th>Images</th>
-                            <th>Name</th>
-                            <th>Price</th>
-                            <th>createdAt</th>
+                            <th>User</th>
+                            <th>Destination</th>
+                            <th>Rating</th>
+                            <th>Comment</th>
+                            <th>Created at</th>
                             <th></th>
                         </tr>
                     </tfoot>
                 </table>
             </div>
-        </div>
+        </div >
     )
 }
 
-export default Destinations
+export default Reviews
