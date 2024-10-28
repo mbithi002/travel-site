@@ -1,9 +1,10 @@
-import { useQuery } from '@tanstack/react-query'
 import React from 'react'
+import useDestinations from '../../hooks/useDestinations.jsx'
 import { formatPostDate } from '../../utils/date/index.js'
 
 const Destinations = () => {
-    const { data: destinations } = useQuery({ queryKey: ['destinations'] })
+    const { destinations, isLoading, isError } = useDestinations()
+
     return (
         <div>
             <div className="overflow-x-scroll sm:overflow-x-auto w-full">
@@ -23,7 +24,7 @@ const Destinations = () => {
                     <tbody>
                         {
                             destinations && destinations.map((destination, i) => (
-                                <tr className='hover:bg-base-100 text-neutral transition-all duration-100'>
+                                <tr key={destination._id} className='hover:bg-base-100 text-neutral transition-all duration-100'>
                                     <th className='hover:bg-gray-100 transition-all duration-100'>
                                         {i + 1}
                                     </th>
@@ -39,22 +40,8 @@ const Destinations = () => {
                                     <th className='hover:bg-gray-100 transition-all duration-100'>
                                         {formatPostDate(destination.createdAt)}
                                     </th>
-                                    <th className='hover:bg-gray-100 transition-all duration-100'>
-                                        <div className="text-primary">
-                                            <button className="m-0 p-0 btn btn-square btn-ghost">
-                                                <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    fill="none"
-                                                    viewBox="0 0 24 24"
-                                                    className="inline-block size-4 stroke-current">
-                                                    <path
-                                                        strokeLinecap="round"
-                                                        strokeLinejoin="round"
-                                                        strokeWidth="2"
-                                                        d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z"></path>
-                                                </svg>
-                                            </button>
-                                        </div>
+                                    <th className='text-primary hover:cursor-pointer hover:underline hover:bg-gray-100 transition-all duration-100'>
+                                        Details
                                     </th>
                                 </tr>
                             ))

@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import Bookings from './Bookings'
 import Destinations from './Destinations'
 import Users from './Users'
 
@@ -25,8 +26,9 @@ const Admin = () => {
                             </button>
                         </div>
                         <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
-                            <li onClick={() => setContent('users')} ><a>users</a></li>
+                            <li onClick={() => setContent('users')} ><a>Users</a></li>
                             <li onClick={() => setContent('destinations')}><a>Destinations</a></li>
+                            <li onClick={() => setContent('bookings')}><a>Bookings</a></li>
                         </ul>
                     </div>
                 </div>
@@ -49,6 +51,7 @@ const Admin = () => {
             </div>
             {content === 'users' && <Users />}
             {content === 'destinations' && <Destinations />}
+            {content === 'bookings' && <Bookings />}
         </div>
     )
 }

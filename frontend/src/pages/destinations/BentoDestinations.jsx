@@ -1,28 +1,11 @@
-import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 
+import useDestinations from '../../hooks/useDestinations.jsx';
 import { DESTINATIONS } from './data/DESTINATIONS.js';
 
 const BentoDestinations = () => {
 
-    const { data: destinations, isLoading, isError } = useQuery({
-        queryKey: ['destinations'],
-        queryFn: async () => {
-            try {
-                const res = await fetch('/api/destinations', { method: 'GET' })
-                const data = await res.json()
-                if (!res.ok) {
-                    throw new Error(data.error) || 'something went wrong'
-                }
-
-                return data
-            } catch (error) {
-                console.log(error.message);
-            }
-        },
-    })
-    console.log(destinations);
-
+    const { destinations, isLoading, isError } = useDestinations()
 
     return (
         <div className="px-4">
