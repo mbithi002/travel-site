@@ -1,10 +1,11 @@
 import React from 'react';
 
+import { useNavigate } from 'react-router';
 import useDestinations from '../../hooks/useDestinations.jsx';
 import { DESTINATIONS } from './data/DESTINATIONS.js';
 
 const BentoDestinations = () => {
-
+    const navigate = useNavigate()
     const { destinations, isLoading, isError } = useDestinations()
 
     return (
@@ -44,6 +45,7 @@ const BentoDestinations = () => {
                     !isLoading && !isError && DESTINATIONS.map((des) => {
                         return destinations.map((destination, index) => (
                             <div
+                                onClick={() => navigate(`/booking/${destination._id}`)}
                                 key={index}
                                 className="relative break-inside-avoid bg-gray-200 text-neutral rounded-lg p-4 shadow-md cursor-pointer hover:shadow-lg transition-shadow duration-300"
                             >

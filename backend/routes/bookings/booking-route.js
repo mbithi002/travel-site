@@ -5,7 +5,8 @@ import {
     deleteBooking,
     getBooking,
     getBookings,
-    updateBooking
+    getBookingsForDestination,
+    updateBooking,
 } from "../../controllers/booking-controller.js";
 import { protectRoute } from "../../middleware/protectRoute.js";
 
@@ -13,6 +14,7 @@ const router = express.Router();
 
 router.post("/", protectRoute, createBooking);
 router.get("/", protectRoute, getBookings);
+router.get("/forDestination/:id", protectRoute, getBookingsForDestination);
 router.get("/:id", protectRoute, getBooking);
 router.put("/:id", protectRoute, updateBooking);
 router.delete("/:id", protectRoute, deleteBooking);

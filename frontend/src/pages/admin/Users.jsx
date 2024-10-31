@@ -1,4 +1,5 @@
 import React from 'react'
+import Avatar from '../../components/common/Avatar'
 import useUsers from '../../hooks/useUsers'
 import { formatMemberSinceDate } from '../../utils/date'
 
@@ -36,13 +37,7 @@ const Users = () => {
                                     </th>
                                     <td className='hover:bg-gray-100 transition-all duration-100'>
                                         <div className="flex items-center gap-3">
-                                            <div className="avatar">
-                                                <div className="mask mask-squircle h-12 w-12">
-                                                    <img
-                                                        src="https://img.daisyui.com/images/profile/demo/2@94.webp"
-                                                        alt="Avatar Tailwind CSS Component" />
-                                                </div>
-                                            </div>
+                                            <Avatar />
                                             <div>
                                                 <div className="font-bold">{user.username}</div>
                                             </div>

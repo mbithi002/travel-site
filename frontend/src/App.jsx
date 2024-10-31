@@ -1,15 +1,17 @@
 import { useQuery } from '@tanstack/react-query';
 import { Toaster } from 'react-hot-toast';
-import { Route, Routes } from 'react-router';
+import { Route, Routes, useNavigate } from 'react-router';
 import './App.css';
 import Footer from './components/Footer';
 import AboutUs from './pages/about/AboutUs';
 import Admin from './pages/admin/Admin';
+import BookingPage from './pages/booking/BookingPage';
 import Destinations from './pages/destinations/Destinations';
 import Header from './pages/home/Header';
 import Home from './pages/home/home';
 
 function App() {
+  const navigate = useNavigate()
   const { data: authUser } = useQuery({
     queryKey: ["authUser"],
     queryFn: async () => {
@@ -34,7 +36,8 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/destinations' element={<Destinations />} />
         <Route path='/about' element={<AboutUs />} />
-        <Route path='/admin' element={authUser?.role === 'admin' && <Admin />} />
+        <Route path='/admin' element={authUser?.role === 'admin' ? <Admin /> : navigate('/')} />
+        <Route path='/booking/:slug' element={<BookingPage />} />
       </Routes>
       <Toaster />
       <Footer />

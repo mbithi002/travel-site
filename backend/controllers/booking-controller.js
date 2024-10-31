@@ -180,3 +180,29 @@ export const cancelBooking = async (req, res) => {
     console.log("Error in deleteBooking: ", error);
   }
 };
+export const getBookingsForDestination = async (req, res) => {
+  try {
+    const { id: destinationId } = req.params;
+
+    const destination = await Destination.findById(destinationId);
+    if (!destination) {
+      return res.status(404).json({ error: "No destination found" });
+    }
+
+    const bookings = await Booking.find({
+      destination: destinationId,
+    }).populate({
+      path: "user",
+      select: "-password",
+    });
+
+    if (bookings.length === 0) {
+      return res.status(404).json({ error: "No bookings found" });
+    }
+
+    res.status(200).json(bookings);
+  } catch (error) {
+    res.status(500).json({ error: "Internal server error" });
+    console.error("Error in getBookingsForDestination: ", error);
+  }
+};
