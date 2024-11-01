@@ -12,6 +12,7 @@ const Reviews = () => {
             <p className="">Something went wrong😢😢</p>
         </div>
     }
+    if (!isLoading && !isError && reviews?.length < 1) return <div className="w-full h-full text-center text-base-200">No reviews yet</div>
     return (
         < div >
             <div className="overflow-x-scroll sm:overflow-x-auto w-full min-h-[75dvh]">
@@ -52,7 +53,6 @@ const Reviews = () => {
                                         {formatPostDate(review.createdAt)}
                                     </th>
                                     <th className='text-primary hover:cursor-pointer hover:underline hover:bg-gray-100 transition-all duration-100'>
-                                        Details
                                     </th>
                                 </tr>
                             ))

@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import Booking from "../models/booking-model.js";
 import Destination from "../models/destination-model.js";
 
@@ -46,7 +47,7 @@ export const getBookings = async (req, res) => {
         path: "user",
         select: "-password",
       });
-    if (!bookings.length) {
+    if (!bookings) {
       return res.status(404).json({
         error: "No bookings found",
       });
@@ -180,9 +181,15 @@ export const cancelBooking = async (req, res) => {
     console.log("Error in deleteBooking: ", error);
   }
 };
+
 export const getBookingsForDestination = async (req, res) => {
   try {
     const { id: destinationId } = req.params;
+
+    // Check if the destinationId is a valid ObjectId
+    if (!mongoose.Types.ObjectId.isValid(destinationId)) {
+      return res.status(400).json({ error: "Invalid destination ID format" });
+    }
 
     const destination = await Destination.findById(destinationId);
     if (!destination) {

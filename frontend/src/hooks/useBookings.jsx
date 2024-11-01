@@ -16,7 +16,8 @@ const useBookings = () => {
             }
         }
     })
-    return { bookings, isLoading, isError }
+    return { bookings , isLoading, isError
+}
 }
 
 export default useBookings

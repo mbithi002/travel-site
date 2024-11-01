@@ -4,6 +4,7 @@ import { formatPostDate } from '../../utils/date'
 
 const Bookings = () => {
     const { bookings, isLoading, isError } = useBookings()
+    if (!isLoading && !isError && bookings?.length < 1) return <div className="w-full h-full text-center text-base-200">No bookigns have been made yet</div>
     if (isLoading) {
         return <div className="skeleton h-[75dvh] my-3 w-full bg-gray-300"></div>
     }
@@ -24,6 +25,7 @@ const Bookings = () => {
                             <th>User</th>
                             <th>E-Mail</th>
                             <th>Booking Date</th>
+                            <th>Destination</th>
                             <th>Price</th>
                             <th>Booking Status</th>
                             <th></th>
@@ -46,6 +48,9 @@ const Bookings = () => {
                                     <td className='hover:bg-gray-100 transition-all duration-100'>
                                         {formatPostDate(booking.createdAt)}
                                     </td>
+                                    <td className='hover:bg-gray-100 transition-all duration-100'>
+                                        {booking.destination?.name}
+                                    </td>
                                     <th className='hover:bg-gray-100 transition-all duration-100'>
                                         {booking.destination.price}
                                     </th>
@@ -67,6 +72,7 @@ const Bookings = () => {
                             <th>User</th>
                             <th>E-Mail</th>
                             <th>Booking Date</th>
+                            <th>Destination</th>
                             <th>Price</th>
                             <th>Booking Status</th>
                             <th></th>
