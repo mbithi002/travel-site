@@ -22,6 +22,12 @@ const reviewSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    booking: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Booking",
+      required: true
+    }
+    ,
   },
   {
     timestamps: true,

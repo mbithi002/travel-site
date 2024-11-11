@@ -7,7 +7,7 @@ export const createReview = async (req, res) => {
     if (!authUser) {
       return res.status(404).json({ error: "no user found" });
     }
-    const { destination, comment, rating } = req.body;
+    const { destination, comment, rating, booking } = req.body;
 
     const existsDestination = await Destination.findById(destination);
     if (!existsDestination) {
@@ -21,6 +21,7 @@ export const createReview = async (req, res) => {
       destination,
       comment,
       rating,
+      booking
     });
     await newReview.save();
     res.status(200).json(newReview);

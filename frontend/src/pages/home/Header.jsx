@@ -55,20 +55,13 @@ const Header = () => {
                                     </li>
                                 )
                             }
-                            {/* <li>
-                                <details className='w-43 bg-base-100'>
-                                    <summary>More</summary>
-                                    <ul className="p-2 w-43"> */}
-                            <li>
-                                <Link to={'/destinations'}>
-                                    My bookings
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to={'/destinations'}>
-                                    Pending
-                                </Link>
-                            </li>
+                            {
+                                authUser && <li>
+                                    <Link to={'/bookings'}>
+                                        My bookings
+                                    </Link>
+                                </li>
+                            }
                         </ul>
                     </div>
                     <a className="btn btn-ghost text-xl">Travel</a>
@@ -99,23 +92,13 @@ const Header = () => {
                                 </li>
                             )
                         }
-                        <li>
-                            <details className='w-43 bg-base-100'>
-                                <summary>More</summary>
-                                <ul className="p-2 w-43">
-                                    <li>
-                                        <Link to={'/destinations'}>
-                                            My bookings
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link to={'/destinations'}>
-                                            Pending
-                                        </Link>
-                                    </li>
-                                </ul>
-                            </details>
-                        </li>
+                        {
+                            authUser && <li>
+                                <Link to={'/bookings'}>
+                                    My bookings
+                                </Link>
+                            </li>
+                        }
                     </ul>
                 </div>
                 {

@@ -197,9 +197,9 @@ const BookingPage = () => {
                                             <button className="btn btn-primary text-white my-2 w-full" type='submit'>Submit</button>
                                         </form>
                                         <div className="modal-action w-full">
-                                            <form method="dialog w-full">
-                                                <button className="btn bg-red-500 w-full">Cancel</button>
-                                            </form>
+                                            {/* <form method="dialog w-full"> */}
+                                            <button onClick={() => document.getElementById('book_now_modal').close()} className="btn bg-red-500 w-full">Cancel</button>
+                                            {/* </form> */}
                                         </div>
                                     </div>
                                 </dialog>

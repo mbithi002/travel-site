@@ -6,6 +6,7 @@ import Footer from './components/Footer';
 import AboutUs from './pages/about/AboutUs';
 import Admin from './pages/admin/Admin';
 import BookingPage from './pages/booking/BookingPage';
+import BookingsInfoPage from './pages/bookingInfo/BookingsInfoPage';
 import Destinations from './pages/destinations/Destinations';
 import Header from './pages/home/Header';
 import Home from './pages/home/home';
@@ -38,6 +39,7 @@ function App() {
         <Route path='/about' element={<AboutUs />} />
         <Route path='/admin' element={authUser?.role === 'admin' ? <Admin /> : navigate('/')} />
         <Route path='/booking/:slug' element={<BookingPage />} />
+        <Route path='/bookings' element={authUser ? <BookingsInfoPage /> : <Home />} />
       </Routes>
       <Toaster />
       <Footer />

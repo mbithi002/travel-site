@@ -12,7 +12,7 @@ export const createBooking = async (req, res) => {
       });
     }
 
-    const { user, destination } = req.body;
+    const { user, destination, adults, children } = req.body;
 
     const exsistsDestination = await Destination.findById(destination);
 
@@ -25,6 +25,8 @@ export const createBooking = async (req, res) => {
     const newBooking = new Booking({
       user,
       destination,
+      adults: Number(adults),
+      children: Number(children)
     });
 
     await newBooking.save();
