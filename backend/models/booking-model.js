@@ -12,6 +12,14 @@ const bookingSchema = new mongoose.Schema(
       ref: "Destination",
       required: true,
     },
+    adults: {
+      type: Number,
+      default: 1
+    },
+    children: {
+      type: Number,
+      default: 0
+    },
     status: {
       type: String,
       enum: ["pending", "confirmed", "cancelled"],
