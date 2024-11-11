@@ -12,7 +12,6 @@ import Header from './pages/home/Header';
 import Home from './pages/home/home';
 
 function App() {
-  const navigate = useNavigate()
   const { data: authUser } = useQuery({
     queryKey: ["authUser"],
     queryFn: async () => {
@@ -37,7 +36,7 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/destinations' element={<Destinations />} />
         <Route path='/about' element={<AboutUs />} />
-        <Route path='/admin' element={authUser?.role === 'admin' ? <Admin /> : navigate('/')} />
+        <Route path='/admin' element={authUser?.role === 'admin' ? <Admin /> : <Home />} />
         <Route path='/booking/:slug' element={<BookingPage />} />
         <Route path='/bookings' element={authUser ? <BookingsInfoPage /> : <Home />} />
       </Routes>

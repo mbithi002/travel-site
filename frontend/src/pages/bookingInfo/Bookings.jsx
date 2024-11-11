@@ -11,7 +11,7 @@ const Bookings = () => {
     const [myBookings, setMyBookings] = useState([])
     useEffect(() => {
         if (authUser && bookings) {
-            const x = bookings.filter((booking) => booking.user._id = authUser._id && booking.status !== 'cancelled')
+            const x = bookings.filter((booking) => booking.user._id === authUser._id && booking.status !== 'cancelled')
             setMyBookings(x)
         }
     }, [bookings, authUser])
