@@ -44,6 +44,19 @@ const CreateDestinationModal = () => {
         }
     })
 
+    const handleCancel = () => {
+        setFormData({
+            name: '',
+            description: '',
+            images: [''],
+            location: '',
+            categories: '',
+            price: '',
+            availability: true,
+            ratings: [0]
+        })
+    }
+
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
         setFormData({
@@ -53,18 +66,27 @@ const CreateDestinationModal = () => {
     };
 
     const handleFileChange = (e) => {
-        const file = e.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                setFormData(prev => ({ ...prev, images: [reader.result] }));
-            };
-            reader.readAsDataURL(file);
-        }
+        const files = Array.from(e.target.files);
+        const imagePromises = files.map(file => {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onloadend = () => resolve(reader.result);
+                reader.onerror = reject;
+                reader.readAsDataURL(file);
+            });
+        });
+
+        Promise.all(imagePromises)
+            .then(images => setFormData(prev => ({ ...prev, images })))
+            .catch(error => console.error("Error loading images:", error));
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        if (!formData.name || !formData.desctirption || !formData.images || !formData.location || !formData.price) {
+            toast.error('Please fill in relevant fields')
+            return
+        }
         createDestination()
         console.log(formData);
         document.getElementById('create_destination_modal').close();
@@ -145,29 +167,39 @@ const CreateDestinationModal = () => {
                                 <input
                                     type="file"
                                     accept="image/*"
+                                    multiple
                                     onChange={handleFileChange}
                                     className="file-input w-full max-w-xs"
                                 />
                                 <div
                                     className="relative break-inside-avoid bg-gray-200 text-neutral rounded-lg p-4 shadow-md cursor-pointer hover:shadow-lg transition-shadow duration-300"
                                 >
-                                    <img
-                                        src={formData.images[0] || ''}
-                                        alt={formData.name || 'Destination Image'}
-                                        className="w-[17rem] h-[17rem] rounded-lg mb-4 object-cover"
-                                    />
+                                    <div className="carousel w-64">
+                                        {
+                                            formData.images && (
+                                                formData.images.map((image, i) => (
+                                                    <div key={i} className="carousel-item w-full">
+                                                        <img
+                                                            src={image}
+                                                            className="w-full"
+                                                            alt={formData.name} />
+                                                    </div>
+                                                ))
+                                            )
+                                        }
+                                    </div>
                                     <h2 className="text-lg font-bold mb-2">{formData.name || 'Destination Name'}</h2>
                                     <h3 className="text-lg text-gray-700">{formData.location || 'Location'}</h3>
-                                    <p className="text-sm mb-2">{formData.description || 'Description'}</p>
-                                    {/* <p className="text-md font-semibold text-blue-600">Price: ${formData.price || '0.00'}</p>
-                                    <p className="text-sm text-green-600">{formData.availability ? 'Available' : 'Not Available'}</p>
-                                    <p className="text-sm text-gray-500">{formData.categories || 'Categories'}</p> */}
+                                    <p className="text-sm mb-2 text-clip w-[17rem]">{formData.description || 'Description'}</p>
                                 </div>
                             </div>
                         </div>
                         <div className="modal-action">
                             <button type="submit" className="btn">Save</button>
-                            <button type="button" className="btn" onClick={() => document.getElementById('create_destination_modal').close()}>Cancel</button>
+                            <button type="button" className="btn" onClick={() => {
+                                handleCancel()
+                                document.getElementById('create_destination_modal').close()
+                            }}>Cancel</button>
                         </div>
                     </form>
                 </div>

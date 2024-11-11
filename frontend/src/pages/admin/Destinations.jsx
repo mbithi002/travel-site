@@ -1,7 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
-import HomeImage from '../../assets/images/home/resort.jpg';
 import BookingsCount from '../../components/common/BookingsCount.jsx';
 import useDestinations from '../../hooks/useDestinations.jsx';
 import { formatPostDate } from '../../utils/date/index.js';
@@ -120,7 +119,7 @@ const Destinations = () => {
                                                 <div className="grid sm:grid-cols-2 gap-4 p-5">
                                                     <div>
                                                         <img
-                                                            src={HomeImage}
+                                                            src={destination.images[0]}
                                                             alt="Travel Destination"
                                                             className="object-cover w-full h-[60dvh]"
                                                         />

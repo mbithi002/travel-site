@@ -32,14 +32,6 @@ export const createDestination = async (req, res) => {
   try {
     const user = req.user;
 
-    if (!user) {
-      return res.status(404).json({ error: `User not found ${req.user}` });
-    }
-
-    if (user.role !== "admin") {
-      return res.status(403).json({ error: "Not authorized" });
-    }
-
     const {
       name,
       description,
@@ -49,6 +41,19 @@ export const createDestination = async (req, res) => {
       price,
       availability,
     } = req.body;
+
+    if (!user) {
+      return res.status(404).json({ error: `User not found ${req.user}` });
+    }
+
+    if (user.role !== "admin") {
+      return res.status(403).json({ error: "Not authorized" });
+    }
+
+    if (!images)
+      return res.status(403).json({
+        error: "No images provided",
+      });
 
     const uploadedImages = [];
     for (const image of images) {

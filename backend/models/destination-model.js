@@ -12,6 +12,10 @@ const destinationSchema = new mongoose.Schema(
       required: true,
       unique: false,
     },
+    date: {
+      type: Date,
+      default: Date.now
+    },
     images: [
       {
         type: String,

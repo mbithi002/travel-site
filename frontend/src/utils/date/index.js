@@ -15,11 +15,15 @@ export const formatPostDate = (createdAt) => {
       day: "numeric",
     });
   } else if (timeDifferenceInDays === 1) {
-    return "1d";
-  } else if (timeDifferenceInHours >= 1) {
-    return `${timeDifferenceInHours}h`;
-  } else if (timeDifferenceInMinutes >= 1) {
-    return `${timeDifferenceInMinutes}m`;
+    return "a day ago";
+  } else if (timeDifferenceInHours > 1) {
+    return `${timeDifferenceInHours} hours ago`;
+  } else if (timeDifferenceInHours === 1) {
+    return `${timeDifferenceInHours} hour ago`;
+  } else if (timeDifferenceInMinutes > 1) {
+    return `${timeDifferenceInMinutes} minutes ago`;
+  } else if (timeDifferenceInMinutes === 1) {
+    return `a minute ago`;
   } else {
     return "Just now";
   }
@@ -45,3 +49,24 @@ export const formatMemberSinceDate = (createdAt) => {
   const year = date.getFullYear();
   return `Joined ${month} ${year}`;
 };
+
+export const formatYearMonth = (createdAt) => {
+  const date = new Date(createdAt);
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+  const month = months[date.getMonth()];
+  const year = date.getFullYear();
+  return `${month} ${year}`
+}
