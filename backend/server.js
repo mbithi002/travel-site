@@ -2,6 +2,7 @@ import { v2 as cloudinary } from "cloudinary";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 import express from "express";
+import path from "path";
 import connectToMongo from "./db/connectToMongo.js";
 import authRoutes from "./routes/auth/auth-routes.js";
 import bookingRoutes from "./routes/bookings/booking-route.js";
@@ -18,6 +19,7 @@ cloudinary.config({
 });
 
 const app = express();
+const __dirname = path.resolve()
 
 app.use(express.json({ limit: "5mb" }));
 app.use(express.urlencoded({ extended: true }));
@@ -28,6 +30,14 @@ app.use("/api/users", usersRoutes);
 app.use("/api/destinations", destinationRoutes);
 app.use("/api/booking", bookingRoutes);
 app.use("/api/review", reviewRoutes);
+
+if (process.env.NODE_ENV = "production") {
+  app.use(express.static(path.join(__dirname, "/frontend/dist")));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
+  })
+}
 
 app.listen(5000, () => {
   console.log("Server is running on port: 5000");
