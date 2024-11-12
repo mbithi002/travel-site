@@ -38,10 +38,10 @@ const MoreInfo = ({ destination }) => {
                         </div>
                         <div className="col-span-8">
                             <h2 className="text-center text-gray-500">{destination.name} reviews</h2>
-                            <div className="grid grid-cols-2 justify-center items-center gap-3">
+                            <div className="grid sm:grid-cols-2 justify-center items-center gap-3">
                                 {
                                     currentReviews && currentReviews.slice(0, offset).map((review, i) => (
-                                        <div key={i} className="bg-white shadow-md hover:shadow-xl transition-all duration-100 rounded-lg p-6 w-[24rem]">
+                                        <div key={i} className="bg-white shadow-md hover:shadow-xl transition-all duration-100 rounded-lg p-6 sm:w-[24rem] w-[20rem]">
                                             <div className="flex items-center">
                                                 <Avatar />
                                                 <div>
@@ -63,9 +63,9 @@ const MoreInfo = ({ destination }) => {
                                 }
                                 {
                                     offset > 2 ? (
-                                        <p onClick={() => setOffset(2)} className="cursor-pointer text-primary">Show less</p>
+                                        <p onClick={() => setOffset(2)} className="cursor-pointer text-primary text-center">Show less</p>
                                     ) : (
-                                        <p onClick={() => setOffset(offset + 2)} className="cursor-pointer text-primary">Show more +</p>
+                                        <p onClick={() => setOffset(offset + 2)} className="cursor-pointer text-primary text-center">Show more +</p>
                                     )
                                 }
                             </div>
