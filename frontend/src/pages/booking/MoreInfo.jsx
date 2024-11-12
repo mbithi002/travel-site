@@ -6,7 +6,7 @@ import { formatPostDate } from '../../utils/date'
 const MoreInfo = ({ destination }) => {
     const { reviews, isLoading, isError } = useReviews()
     const [currentReviews, setCurrentReviews] = useState(null)
-    const [offset, setOffset] = useState(1)
+    const [offset, setOffset] = useState(2)
     useEffect(() => {
         if (destination && reviews) {
             const x = reviews.filter((review) => review.destination._id === destination._id)
