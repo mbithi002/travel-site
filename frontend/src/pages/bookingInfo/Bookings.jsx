@@ -16,7 +16,6 @@ const Bookings = () => {
         }
     }, [bookings, authUser])
 
-
     const { mutate: cancelBooking, isPending, isError: errorCancellingBooking } = useMutation({
         mutationFn: async (id) => {
             try {
@@ -41,11 +40,21 @@ const Bookings = () => {
         }
     })
 
+    if (isLoading) {
+        return <div className="skeleton h-[75dvh] my-3 w-full bg-gray-300"></div>
+    }
+    if (isError) {
+        return <div className="h-[75dvh] my-3 w-full text-red-500 text-center flex items-center justify-center">
+            <p className="">Something went wrong😢😢</p>
+        </div>
+    }
+    if (!isLoading && !isError && myBookings?.length < 1) return <div className="w-full h-full text-center text-base-200">No bookings yet</div>
+
     return (
         <>
             {
                 myBookings && (
-                    <div className="flex flex-col items-center">
+                    <div className="flex flex-col items-center overflow-x-scroll w-full my-2">
                         <h2 className="text-lg text-neutral">My Bokings</h2>
                         <div className="overflow-x-scroll">
                             <table className="table">

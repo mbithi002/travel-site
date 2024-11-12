@@ -48,7 +48,8 @@ export const getBookings = async (req, res) => {
       .populate({
         path: "user",
         select: "-password",
-      });
+      })
+      .sort({ createdAt: -1 });
     if (!bookings) {
       return res.status(404).json({
         error: "No bookings found",

@@ -5,6 +5,7 @@ import { useParams } from 'react-router'
 import useDestinations from '../../hooks/useDestinations'
 import { formatYearMonth } from '../../utils/date'
 import { validateAndFormatPhoneNumber } from '../../utils/phone'
+import MoreInfo from './MoreInfo'
 
 const BookingPage = () => {
     const { slug } = useParams()
@@ -153,7 +154,13 @@ const BookingPage = () => {
                                     <p>Enter Your PIN and confirm</p>
                                     <hr />
                                 </div>
-                                <button onClick={() => document.getElementById('book_now_modal').showModal()} className="btn btn-accent w-full text-base-100 mt-auto">Book Now!</button>
+                                <button onClick={() => {
+                                    if (authUser) {
+                                        document.getElementById('book_now_modal').showModal()
+                                    } else {
+                                        toast.error('Please Signup or Login to your account')
+                                    }
+                                }} className="btn btn-accent w-full text-base-100 mt-auto">Book Now!</button>
                                 <dialog id="book_now_modal" className="modal">
                                     <div className="modal-box">
                                         <h3 className="font-bold text-lg">Fill the fields below</h3>
@@ -211,13 +218,18 @@ const BookingPage = () => {
                                 <div className="carousel w-full">
                                     {destination.images?.map((image, i) => (
                                         <div key={i} className="carousel-item w-full">
-                                            <img src={image} className="w-full" alt={destination.name} />
+                                            <img src={image} className="w-full object-cover max-h-screen" alt={destination.name} />
                                         </div>
                                     ))}
                                 </div>
                             </div>
                         </div>
                     </div>
+                )
+            }
+            {
+                destination && (
+                    <MoreInfo destination={destination} />
                 )
             }
         </div>

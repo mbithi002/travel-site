@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import React, { useState } from 'react';
+import toast from 'react-hot-toast';
 
 const Login = () => {
     const [formData, setFormData] = useState({
@@ -34,9 +35,12 @@ const Login = () => {
             }
         },
         onSuccess: () => {
-            // refetch the authUser
+            toast.success("Login successful")
             queryClient.invalidateQueries({ queryKey: ["authUser"] });
         },
+        onError: (error) => {
+            toast.error(error.message || 'something went wrong')
+        }
     });
 
     const handleSubmit = (e) => {

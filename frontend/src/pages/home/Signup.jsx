@@ -37,6 +37,9 @@ const Signup = () => {
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['authUser'] })
             toast.success("account created successfully")
+        },
+        onError: () => {
+            toast.error("Failed to create account")
         }
     });
 

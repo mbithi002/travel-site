@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import HomeImage from '../../assets/images/home/resort.jpg'
 import Activities from './Activities'
 import FeaturedDestinations from './FeaturedDestinations'
@@ -36,7 +37,11 @@ const Home = () => {
                                 Explore the world's most beautiful destinations with ease.
                                 Browse destinations, book for a trip, pay and enjoy.
                             </p>
-                            <button className="btn btn-accent text-white">Start Your Journey</button>
+                            <Link to={'/destinations'}>
+                                <button className="btn btn-accent text-white">
+                                    Start Your Journey
+                                </button>
+                            </Link>
                         </div>
                     </div>
                 </div>

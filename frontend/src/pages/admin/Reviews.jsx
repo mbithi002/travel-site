@@ -38,7 +38,7 @@ const Reviews = () => {
                                         {i + 1}
                                     </th>
                                     <td className='hover:bg-gray-100 transition-all duration-100'>
-                                        {review.user.fullName}
+                                        {review.user.email}
                                     </td>
                                     <td className='hover:bg-gray-100 transition-all duration-100'>
                                         {review.destination.name}

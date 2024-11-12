@@ -42,6 +42,9 @@ export const getReviews = async (req, res) => {
       })
       .populate({
         path: "destination",
+      })
+      .sort({
+        createdAt: -1,
       });
     if (!reviews) {
       return res.status(404).json({

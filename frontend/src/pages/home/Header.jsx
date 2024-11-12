@@ -64,7 +64,9 @@ const Header = () => {
                             }
                         </ul>
                     </div>
-                    <a className="btn btn-ghost text-xl">Travel</a>
+                    <Link to={'/'}>
+                        <a className="btn btn-ghost text-xl">Travel</a>
+                    </Link>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
@@ -115,7 +117,7 @@ const Header = () => {
                         ) : (
                             <div className="navbar-end">
                                 <div className="dropdown dropdown-end">
-                                    <div tabIndex={0} role="button" className="btn btn-primary m-1">Login</div>
+                                    <div tabIndex={0} role="button" className="btn btn-primary m-1 text-base-100">Login</div>
                                     <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-[1] w-70 p-2 shadow">
                                         <Login />
                                     </ul>

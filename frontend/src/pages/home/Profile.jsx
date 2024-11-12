@@ -32,6 +32,7 @@ const Profile = () => {
             }
         },
         onSuccess: () => {
+            toast.success("Logout successfull")
             queryClient.invalidateQueries({ queryKey: ['authUser'] });
         },
         onError: () => {
@@ -62,6 +63,9 @@ const Profile = () => {
             queryClient.invalidateQueries({ queryKey: ['authUser'] });
             setToggleUpdate(!toggleUpdate)
             toast.success("New profile saved")
+        },
+        onError: (error) => {
+            toast.error("Failed to update profile")
         }
     })
 
@@ -84,7 +88,7 @@ const Profile = () => {
             toast.success("Profile deleted successfully")
             queryClient.invalidateQueries({ queryKey: ['authUser'] });
         },
-        onError: () => {
+        onError: (error) => {
             toast.error("Failed to delete profile")
         }
     })

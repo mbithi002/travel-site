@@ -3,7 +3,7 @@ import User from "../models/user-model.js";
 
 export const getUsers = async (req, res) => {
   try {
-    const users = await User.find().select("-password");
+    const users = await User.find().select("-password").sort({ createdAt: -1 });
     if (!users) {
       return res.status(404).json({
         error: "no users found",
@@ -38,6 +38,7 @@ export const getUser = async (req, res) => {
     console.log("Error in getUser: ", error);
   }
 };
+
 export const updateUser = async (req, res) => {
   const { username, oldPassword, newPassword, email, fullName } = req.body;
   const userId = req.user._id;
