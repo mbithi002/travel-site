@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { Toaster } from 'react-hot-toast';
-import { Route, Routes, useNavigate } from 'react-router';
+import { Route, Routes } from 'react-router';
 import './App.css';
 import Footer from './components/Footer';
 import AboutUs from './pages/about/AboutUs';
@@ -9,7 +9,7 @@ import BookingPage from './pages/booking/BookingPage';
 import BookingsInfoPage from './pages/bookingInfo/BookingsInfoPage';
 import Destinations from './pages/destinations/Destinations';
 import Header from './pages/home/Header';
-import Home from './pages/home/home';
+import Home from './pages/home/Home';
 
 function App() {
   const { data: authUser } = useQuery({
