@@ -10,7 +10,7 @@ const BentoDestinations = ({ destinations, isError, isLoading }) => {
     return (
         <div className="sm:px-4 my-3">
             {isLoading && (
-                <div className="columns-2 sm:columns-2 lg:columns-3 xl:columns-4 sm:gap-4 gap-2 space-y-4">
+                <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 sm:gap-4 gap-2 space-y-4">
                     {/* Skeleton Loading */}
                     {[...Array(4)].map((_, i) => (
                         <div key={i} className="flex w-[14rem] flex-col gap-4 mx-auto">
