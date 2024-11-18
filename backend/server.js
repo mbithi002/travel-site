@@ -3,6 +3,7 @@ import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 import express from "express";
 import path from "path";
+import job from "./cron.js";
 import connectToMongo from "./db/connectToMongo.js";
 import authRoutes from "./routes/auth/auth-routes.js";
 import bookingRoutes from "./routes/bookings/booking-route.js";
@@ -17,6 +18,8 @@ cloudinary.config({
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
+
+job.start()
 
 const app = express();
 const __dirname = path.resolve()
