@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion'
 import React from 'react'
 
 const FeaturedDestinations = () => {
@@ -5,7 +6,9 @@ const FeaturedDestinations = () => {
         <div>
             <h2 className="text-neutral text-center text-xl my-2">Featured Destinations</h2>
             <div className="grid sm:grid-cols-12 gap-4 my-4">
-                <div className="sm:col-span-3 bg-accent h-[16rem] rounded-lg hover:cursor-pointer transition-all duration-200 hover:scale-[.9] hover:shadow-lg">
+                <motion.div
+                    className="sm:col-span-3 bg-accent h-[16rem] rounded-lg hover:cursor-pointer transition-all duration-200 hover:scale-[.9] hover:shadow-lg"
+                >
                     <div className="relative h-[16rem] rounded-lg overflow-hidden shadow-lg hover:scale-y-95 transition-transform duration-200">
                         <img
                             src="https://i.pinimg.com/474x/70/c5/3a/70c53a09197e61a6348e1b217b398c63.jpg"
@@ -17,7 +20,7 @@ const FeaturedDestinations = () => {
                             <p className="text-white">Adventure awaits</p>
                         </div>
                     </div>
-                </div>
+                </motion.div>
                 <div className="sm:col-span-3 bg-accent h-[16rem] rounded-lg hover:cursor-pointer transition-all duration-200 hover:scale-[.9] hover:shadow-lg">
                     <div className="relative h-[16rem] rounded-lg overflow-hidden shadow-lg hover:scale-y-95 transition-transform duration-200">
                         <img
