@@ -21,6 +21,8 @@ const BookingPage = () => {
         phone: ''
     })
     const [formError, setFormError] = useState('')
+    const [stkPushLoading, setStkPushLoading] = useState(null)
+    const [processingPayment, setProcessingPayment] = useState(null)
 
     useEffect(() => {
         const selectedDestination = destinations?.find((dest) => dest._id === slug)
@@ -35,6 +37,37 @@ const BookingPage = () => {
             })
         }
     }, [slug, destinations, authUser])
+
+    const { mutate: initMpesa } = useMutation({
+        mutationFn: async (data) => {
+            try {
+                const res = await fetch('/api/mpesa/init', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ phoneNumber: data.phone, amount: '1', user: authUser?._id, booking: 'test' })
+                })
+                const data = await res.json()
+                setStkPushLoading('done')
+                if (!res.ok) {
+                    setStkPushLoading('error')
+                    throw new Error(data.error) || 'Something went wrong'
+                }
+                return data
+            } catch (error) {
+                setStkPushLoading('error')
+                throw new Error(error)
+            }
+        },
+        onSuccess: () => {
+            setStkPushLoading('done')
+        },
+        onError: (error) => {
+            setStkPushLoading('error')
+            toast.error('Sometihng went wrong')
+        }
+    })
 
     const { mutate: createBooking } = useMutation({
         mutationFn: async () => {
@@ -203,11 +236,42 @@ const BookingPage = () => {
                                             />
                                             <button className="btn btn-primary text-white my-2 w-full" type='submit'>Submit</button>
                                         </form>
+
                                         <div className="modal-action w-full">
-                                            {/* <form method="dialog w-full"> */}
                                             <button onClick={() => document.getElementById('book_now_modal').close()} className="btn bg-red-500 w-full">Cancel</button>
-                                            {/* </form> */}
                                         </div>
+                                        {/* <div className="flex flex-col items-stert justify-between p-10 gap-5">
+                                            <h3 className="my-3 text-center font-semibold text-xl text-green-500">
+                                                M-Pesa payment
+                                            </h3>
+                                            <div className="w-full flex flex-row items-center justify-normal gap-3">
+                                                {stkPushLoading === 'done' ? (
+                                                    <div className="form-control">
+                                                        <label className="cursor-pointer label">
+                                                            <input type="checkbox" defaultChecked readOnly className="checkbox checkbox-success bg-base-100 my-auto" />
+                                                        </label>
+                                                    </div>
+                                                ) : <PulseLoader />}
+                                                {stkPushLoading === 'done' && 'Stk-Push message sent successully'}
+                                                {stkPushLoading === 'error' && 'Error sending Stk-Push message'}
+                                                {stkPushLoading === null && 'Please wait for M-Pesa pop-up'}
+                                            </div>
+                                            <div className="w-full flex flex-row items-center justify-normal gap-3">
+                                                {processingPayment === 'done' ? (
+                                                    <div className="form-control">
+                                                        <label className="cursor-pointer label">
+                                                            <input type="checkbox" defaultChecked readOnly className="checkbox checkbox-success bg-base-100 my-auto" />
+                                                        </label>
+                                                    </div>
+                                                ) : <PulseLoader />}
+                                                {processingPayment === 'done' && 'Payment processed successfully'}
+                                                {processingPayment === 'error' && 'Error processing payment'}
+                                                {processingPayment === null && 'Waiting to process payment'}
+                                            </div>
+                                            <div className="w-full flex flex-row items-center justify-normal gap-3">
+                                                <PulseLoader /> Redirecting
+                                            </div>
+                                        </div> */}
                                     </div>
                                 </dialog>
                             </div>

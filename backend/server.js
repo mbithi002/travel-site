@@ -3,11 +3,12 @@ import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 import express from "express";
 import path from "path";
-import job from "./cron.js";
+import { startKeepAliveJob } from "./cron.js";
 import connectToMongo from "./db/connectToMongo.js";
 import authRoutes from "./routes/auth/auth-routes.js";
 import bookingRoutes from "./routes/bookings/booking-route.js";
 import destinationRoutes from "./routes/destinations/destination-routes.js";
+import mpesaRoutes from "./routes/Mpesa/mpesa-routes.js";
 import reviewRoutes from "./routes/reviews/review-route.js";
 import usersRoutes from "./routes/users/users-routes.js";
 
@@ -19,7 +20,6 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-job.start()
 
 const app = express();
 const __dirname = path.resolve()
@@ -33,6 +33,7 @@ app.use("/api/users", usersRoutes);
 app.use("/api/destinations", destinationRoutes);
 app.use("/api/booking", bookingRoutes);
 app.use("/api/review", reviewRoutes);
+app.use("/api/mpesa", mpesaRoutes);
 
 if (process.env.NODE_ENV = "production") {
   app.use(express.static(path.join(__dirname, "/frontend/dist")));
@@ -45,4 +46,5 @@ if (process.env.NODE_ENV = "production") {
 app.listen(5000, () => {
   console.log("Server is running on port: 5000");
   connectToMongo();
+  startKeepAliveJob();
 });
